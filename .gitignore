@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+venv/
+.venv/
+env/
+
+# Secrets — never commit these
+.env
+*.pem
+kalshi_private_key
+kalshi_private_key.pem
+
+# Database and logs
+kalshi_bot.db
+bot.log
+bot_error.log
+trades.csv
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Misc
+*.egg-info/
+dist/
+build/

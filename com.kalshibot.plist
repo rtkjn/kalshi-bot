@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.kalshibot</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/rjain/Documents/Personal Projects/kalshi-bot/venv/bin/python3</string>
+        <string>/Users/rjain/Documents/Personal Projects/kalshi-bot/main.py</string>
+    </array>
+    <key>WorkingDirectory</key>
+    <string>/Users/rjain/Documents/Personal Projects/kalshi-bot</string>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/Users/rjain/Documents/Personal Projects/kalshi-bot/bot.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/rjain/Documents/Personal Projects/kalshi-bot/bot_error.log</string>
+</dict>
+</plist>
