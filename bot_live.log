@@ -1,102 +1,270 @@
-2026-03-26T17:44:33 | INFO     | __main__         | ============================================================
-2026-03-26T17:44:33 | INFO     | __main__         | Kalshi Mean-Reversion Bot starting up
-2026-03-26T17:44:33 | INFO     | __main__         | DRY RUN: True
-2026-03-26T17:44:33 | INFO     | __main__         | Assets: ['BTC', 'ETH']
-2026-03-26T17:44:33 | INFO     | __main__         | Entry threshold: 40%
-2026-03-26T17:44:33 | INFO     | __main__         | Exit range: 48% - 50%
-2026-03-26T17:44:33 | INFO     | __main__         | Trade size: $5.0
-2026-03-26T17:44:33 | INFO     | __main__         | ============================================================
-2026-03-26T17:44:33 | INFO     | __main__         | Price feed connecting...
-2026-03-26T17:44:33 | INFO     | price_feed       | Connecting to Coinbase price feed: ['BTC-USD', 'ETH-USD']
-2026-03-26T17:44:37 | INFO     | __main__         | STATUS | BTC=$68,943 ETH=$2,069 | positions=0 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:44:42 | INFO     | __main__         | STATUS | BTC=$68,953 ETH=$2,069 | positions=0 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:44:47 | INFO     | __main__         | STATUS | BTC=$68,966 ETH=$2,069 | positions=0 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:44:52 | INFO     | __main__         | STATUS | BTC=$68,966 ETH=$2,069 | positions=0 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:44:57 | INFO     | __main__         | STATUS | BTC=$68,972 ETH=$2,069 | positions=0 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:45:02 | INFO     | __main__         | STATUS | BTC=$68,972 ETH=$2,069 | positions=0 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:45:07 | INFO     | __main__         | STATUS | BTC=$68,972 ETH=$2,069 | positions=0 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:45:12 | INFO     | __main__         | STATUS | BTC=$68,972 ETH=$2,069 | positions=0 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:45:18 | INFO     | __main__         | STATUS | BTC=$68,971 ETH=$2,069 | positions=0 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:45:23 | INFO     | __main__         | STATUS | BTC=$68,971 ETH=$2,069 | positions=0 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:45:28 | INFO     | __main__         | STATUS | BTC=$68,948 ETH=$2,069 | positions=0 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:45:33 | INFO     | __main__         | STATUS | BTC=$68,933 ETH=$2,069 | positions=0 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:45:38 | INFO     | __main__         | STATUS | BTC=$68,933 ETH=$2,068 | positions=0 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:45:43 | INFO     | __main__         | STATUS | BTC=$68,933 ETH=$2,068 | positions=0 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:45:48 | INFO     | __main__         | STATUS | BTC=$68,933 ETH=$2,068 | positions=0 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:45:53 | INFO     | __main__         | STATUS | BTC=$68,933 ETH=$2,068 | positions=0 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:45:59 | INFO     | __main__         | STATUS | BTC=$68,933 ETH=$2,068 | positions=0 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:46:04 | INFO     | __main__         | STATUS | BTC=$68,923 ETH=$2,068 | positions=0 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:46:09 | INFO     | __main__         | STATUS | BTC=$68,923 ETH=$2,068 | positions=0 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:46:14 | INFO     | __main__         | STATUS | BTC=$68,923 ETH=$2,068 | positions=0 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:46:19 | INFO     | __main__         | STATUS | BTC=$68,918 ETH=$2,067 | positions=0 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:46:24 | INFO     | __main__         | STATUS | BTC=$68,918 ETH=$2,067 | positions=0 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:46:29 | INFO     | __main__         | STATUS | BTC=$68,917 ETH=$2,067 | positions=0 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:46:34 | INFO     | __main__         | STATUS | BTC=$68,916 ETH=$2,068 | positions=0 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:46:39 | INFO     | __main__         | STATUS | BTC=$68,917 ETH=$2,068 | positions=0 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:46:45 | INFO     | strategy         | ENTRY SIGNAL: KXBTC15M-26MAR261800-00 | side=yes | odds=38.00% | 12 contracts @ 39¢ | reason=YES odds 38.00% < threshold 40.00%
-2026-03-26T17:46:45 | INFO     | kalshi_client    | [DRY RUN] Would place YES order: 12 contracts @ 39¢ on KXBTC15M-26MAR261800-00
-2026-03-26T17:46:45 | INFO     | risk_manager     | Position opened: KXBTC15M-26MAR261800-00 | open=1
-2026-03-26T17:46:45 | INFO     | logger           | [LOG] ENTRY KXBTC15M-26MAR261800-00 yes 12x @ 39¢ cost=$4.68
-2026-03-26T17:46:45 | INFO     | order_manager    | ENTRY PLACED: KXBTC15M-26MAR261800-00 | yes | 12 contracts @ 39¢ | cost=$4.68
-2026-03-26T17:46:45 | INFO     | __main__         | STATUS | BTC=$68,927 ETH=$2,069 | positions=1 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:46:50 | INFO     | __main__         | STATUS | BTC=$68,927 ETH=$2,069 | positions=1 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:46:55 | INFO     | __main__         | STATUS | BTC=$68,945 ETH=$2,069 | positions=1 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:47:00 | INFO     | __main__         | STATUS | BTC=$68,934 ETH=$2,069 | positions=1 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:47:05 | INFO     | __main__         | STATUS | BTC=$68,934 ETH=$2,069 | positions=1 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:47:10 | INFO     | __main__         | STATUS | BTC=$68,948 ETH=$2,069 | positions=1 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:47:15 | INFO     | __main__         | STATUS | BTC=$68,954 ETH=$2,069 | positions=1 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:47:21 | INFO     | __main__         | STATUS | BTC=$68,937 ETH=$2,069 | positions=1 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:47:26 | INFO     | __main__         | STATUS | BTC=$68,937 ETH=$2,069 | positions=1 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:47:31 | INFO     | __main__         | STATUS | BTC=$68,933 ETH=$2,069 | positions=1 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:47:36 | INFO     | __main__         | STATUS | BTC=$68,937 ETH=$2,069 | positions=1 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:47:41 | INFO     | __main__         | STATUS | BTC=$68,954 ETH=$2,069 | positions=1 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:47:46 | INFO     | __main__         | STATUS | BTC=$68,969 ETH=$2,069 | positions=1 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:47:51 | INFO     | __main__         | STATUS | BTC=$68,969 ETH=$2,069 | positions=1 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:47:56 | INFO     | __main__         | STATUS | BTC=$68,969 ETH=$2,070 | positions=1 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:48:01 | INFO     | __main__         | STATUS | BTC=$68,948 ETH=$2,069 | positions=1 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:48:07 | INFO     | __main__         | STATUS | BTC=$68,948 ETH=$2,069 | positions=1 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:48:12 | INFO     | __main__         | STATUS | BTC=$68,946 ETH=$2,069 | positions=1 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:48:17 | INFO     | __main__         | STATUS | BTC=$68,948 ETH=$2,069 | positions=1 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:48:22 | INFO     | __main__         | STATUS | BTC=$68,964 ETH=$2,070 | positions=1 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:48:27 | INFO     | __main__         | STATUS | BTC=$68,974 ETH=$2,070 | positions=1 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:48:32 | INFO     | __main__         | STATUS | BTC=$68,953 ETH=$2,069 | positions=1 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:48:37 | INFO     | __main__         | STATUS | BTC=$68,958 ETH=$2,069 | positions=1 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:48:42 | INFO     | __main__         | STATUS | BTC=$68,950 ETH=$2,069 | positions=1 | daily_pnl=$+0.00 | kill=False
-2026-03-26T17:48:48 | INFO     | strategy         | EXIT SIGNAL: KXBTC15M-26MAR261800-00 | side=yes | odds=53.00% | 12 contracts @ 52¢ | reason=Odds recovered to 53.00% — take profit
-2026-03-26T17:48:48 | INFO     | kalshi_client    | [DRY RUN] Would place YES order: 12 contracts @ 52¢ on KXBTC15M-26MAR261800-00
-2026-03-26T17:48:48 | INFO     | risk_manager     | Position closed: KXBTC15M-26MAR261800-00 | pnl=$+1.56 | daily_pnl=$+1.56
-2026-03-26T17:48:48 | INFO     | logger           | [LOG] EXIT  KXBTC15M-26MAR261800-00 yes 12x @ 52¢ proceeds=$6.24 pnl=$+1.56
-2026-03-26T17:48:48 | INFO     | order_manager    | EXIT PLACED: KXBTC15M-26MAR261800-00 | yes | 12 contracts @ 52¢ | pnl=$+1.56
-2026-03-26T17:48:48 | INFO     | __main__         | STATUS | BTC=$68,948 ETH=$2,069 | positions=0 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:48:53 | INFO     | __main__         | STATUS | BTC=$68,950 ETH=$2,069 | positions=0 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:48:58 | INFO     | __main__         | STATUS | BTC=$68,948 ETH=$2,069 | positions=0 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:49:03 | INFO     | __main__         | STATUS | BTC=$68,941 ETH=$2,069 | positions=0 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:49:08 | INFO     | __main__         | STATUS | BTC=$68,963 ETH=$2,070 | positions=0 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:49:13 | INFO     | __main__         | STATUS | BTC=$68,950 ETH=$2,069 | positions=0 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:49:18 | INFO     | strategy         | ENTRY SIGNAL: KXETH15M-26MAR261800-00 | side=no | odds=38.00% | 12 contracts @ 39¢ | reason=NO odds 38.00% < threshold 40.00%
-2026-03-26T17:49:18 | INFO     | kalshi_client    | [DRY RUN] Would place NO order: 12 contracts @ 39¢ on KXETH15M-26MAR261800-00
-2026-03-26T17:49:18 | INFO     | risk_manager     | Position opened: KXETH15M-26MAR261800-00 | open=1
-2026-03-26T17:49:18 | INFO     | logger           | [LOG] ENTRY KXETH15M-26MAR261800-00 no 12x @ 39¢ cost=$4.68
-2026-03-26T17:49:18 | INFO     | order_manager    | ENTRY PLACED: KXETH15M-26MAR261800-00 | no | 12 contracts @ 39¢ | cost=$4.68
-2026-03-26T17:49:18 | INFO     | __main__         | STATUS | BTC=$68,972 ETH=$2,070 | positions=1 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:49:23 | INFO     | __main__         | STATUS | BTC=$68,948 ETH=$2,070 | positions=1 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:49:29 | INFO     | __main__         | STATUS | BTC=$68,958 ETH=$2,069 | positions=1 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:49:34 | INFO     | __main__         | STATUS | BTC=$68,970 ETH=$2,070 | positions=1 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:49:39 | INFO     | __main__         | STATUS | BTC=$68,956 ETH=$2,070 | positions=1 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:49:44 | INFO     | __main__         | STATUS | BTC=$68,956 ETH=$2,069 | positions=1 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:49:49 | INFO     | __main__         | STATUS | BTC=$68,963 ETH=$2,069 | positions=1 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:49:54 | INFO     | __main__         | STATUS | BTC=$68,961 ETH=$2,069 | positions=1 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:49:59 | INFO     | __main__         | STATUS | BTC=$68,956 ETH=$2,069 | positions=1 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:50:04 | INFO     | __main__         | STATUS | BTC=$68,958 ETH=$2,070 | positions=1 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:50:10 | INFO     | __main__         | STATUS | BTC=$68,948 ETH=$2,069 | positions=1 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:50:15 | INFO     | __main__         | STATUS | BTC=$68,949 ETH=$2,069 | positions=1 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:50:20 | INFO     | __main__         | STATUS | BTC=$68,942 ETH=$2,069 | positions=1 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:50:25 | INFO     | __main__         | STATUS | BTC=$68,942 ETH=$2,069 | positions=1 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:50:30 | INFO     | __main__         | STATUS | BTC=$68,949 ETH=$2,069 | positions=1 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:50:35 | INFO     | __main__         | STATUS | BTC=$68,940 ETH=$2,069 | positions=1 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:50:40 | INFO     | __main__         | STATUS | BTC=$68,934 ETH=$2,069 | positions=1 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:50:45 | INFO     | __main__         | STATUS | BTC=$68,948 ETH=$2,069 | positions=1 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:50:50 | INFO     | __main__         | STATUS | BTC=$68,948 ETH=$2,069 | positions=1 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:50:56 | INFO     | __main__         | STATUS | BTC=$68,942 ETH=$2,069 | positions=1 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:51:01 | INFO     | __main__         | STATUS | BTC=$68,936 ETH=$2,069 | positions=1 | daily_pnl=$+1.56 | kill=False
-2026-03-26T17:51:06 | INFO     | __main__         | STATUS | BTC=$68,932 ETH=$2,068 | positions=1 | daily_pnl=$+1.56 | kill=False
+2026-03-26T18:07:44 | INFO     | __main__         | ============================================================
+2026-03-26T18:07:44 | INFO     | __main__         | Kalshi Mean-Reversion Bot starting up
+2026-03-26T18:07:44 | INFO     | __main__         | DRY RUN: False
+2026-03-26T18:07:44 | INFO     | __main__         | Assets: ['BTC', 'ETH']
+2026-03-26T18:07:44 | INFO     | __main__         | Entry threshold: 40%
+2026-03-26T18:07:44 | INFO     | __main__         | Exit range: 48% - 50%
+2026-03-26T18:07:44 | INFO     | __main__         | Trade size: $5.0
+2026-03-26T18:07:44 | INFO     | __main__         | ============================================================
+2026-03-26T18:07:44 | INFO     | __main__         | Price feed connecting...
+2026-03-26T18:07:44 | INFO     | price_feed       | Connecting to Coinbase price feed: ['BTC-USD', 'ETH-USD']
+2026-03-26T18:07:47 | INFO     | __main__         | STATUS | BTC=$68,894 ETH=$2,067 | BTC YES=70% NO=28% | ETH YES=54% NO=44% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:07:53 | INFO     | __main__         | STATUS | BTC=$68,892 ETH=$2,067 | BTC YES=70% NO=28% | ETH YES=54% NO=44% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:07:58 | INFO     | __main__         | STATUS | BTC=$68,911 ETH=$2,068 | BTC YES=50% NO=49% | ETH YES=36% NO=62% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:08:03 | INFO     | __main__         | STATUS | BTC=$68,902 ETH=$2,068 | BTC YES=50% NO=49% | ETH YES=36% NO=62% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:08:08 | INFO     | __main__         | STATUS | BTC=$68,916 ETH=$2,069 | BTC YES=50% NO=49% | ETH YES=36% NO=62% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:08:13 | INFO     | __main__         | STATUS | BTC=$68,933 ETH=$2,069 | BTC YES=50% NO=49% | ETH YES=36% NO=62% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:08:18 | INFO     | __main__         | STATUS | BTC=$68,932 ETH=$2,069 | BTC YES=50% NO=49% | ETH YES=36% NO=62% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:08:23 | INFO     | __main__         | STATUS | BTC=$68,931 ETH=$2,069 | BTC YES=50% NO=49% | ETH YES=36% NO=62% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:08:29 | INFO     | __main__         | STATUS | BTC=$68,905 ETH=$2,068 | BTC YES=74% NO=25% | ETH YES=67% NO=30% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:08:34 | INFO     | __main__         | STATUS | BTC=$68,900 ETH=$2,068 | BTC YES=74% NO=25% | ETH YES=67% NO=30% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:08:39 | INFO     | __main__         | STATUS | BTC=$68,896 ETH=$2,068 | BTC YES=74% NO=25% | ETH YES=67% NO=30% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:08:44 | INFO     | __main__         | STATUS | BTC=$68,860 ETH=$2,067 | BTC YES=38% NO=61% | ETH YES=34% NO=64% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:08:49 | INFO     | __main__         | STATUS | BTC=$68,860 ETH=$2,067 | BTC YES=38% NO=61% | ETH YES=34% NO=64% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:08:54 | INFO     | __main__         | STATUS | BTC=$68,860 ETH=$2,067 | BTC YES=38% NO=61% | ETH YES=34% NO=64% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:08:59 | INFO     | __main__         | STATUS | BTC=$68,855 ETH=$2,066 | BTC YES=38% NO=61% | ETH YES=34% NO=64% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:09:04 | INFO     | __main__         | STATUS | BTC=$68,850 ETH=$2,066 | BTC YES=38% NO=61% | ETH YES=34% NO=64% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:09:10 | INFO     | __main__         | STATUS | BTC=$68,848 ETH=$2,066 | BTC YES=38% NO=61% | ETH YES=34% NO=64% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:09:15 | INFO     | __main__         | STATUS | BTC=$68,850 ETH=$2,066 | BTC YES=37% NO=62% | ETH YES=34% NO=63% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:09:20 | INFO     | __main__         | STATUS | BTC=$68,850 ETH=$2,066 | BTC YES=37% NO=62% | ETH YES=34% NO=63% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:09:25 | INFO     | __main__         | STATUS | BTC=$68,817 ETH=$2,065 | BTC YES=37% NO=62% | ETH YES=34% NO=63% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:09:30 | INFO     | __main__         | STATUS | BTC=$68,820 ETH=$2,065 | BTC YES=37% NO=62% | ETH YES=34% NO=63% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:09:35 | INFO     | __main__         | STATUS | BTC=$68,836 ETH=$2,066 | BTC YES=37% NO=62% | ETH YES=34% NO=63% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:09:40 | INFO     | __main__         | STATUS | BTC=$68,838 ETH=$2,066 | BTC YES=37% NO=62% | ETH YES=34% NO=63% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:09:45 | INFO     | __main__         | STATUS | BTC=$68,838 ETH=$2,066 | BTC YES=27% NO=71% | ETH YES=23% NO=74% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:09:51 | INFO     | __main__         | STATUS | BTC=$68,842 ETH=$2,066 | BTC YES=27% NO=71% | ETH YES=23% NO=74% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:09:56 | INFO     | __main__         | STATUS | BTC=$68,835 ETH=$2,066 | BTC YES=27% NO=71% | ETH YES=23% NO=74% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:10:01 | INFO     | __main__         | STATUS | BTC=$68,839 ETH=$2,067 | BTC YES=27% NO=71% | ETH YES=23% NO=74% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:10:06 | INFO     | __main__         | STATUS | BTC=$68,839 ETH=$2,067 | BTC YES=27% NO=71% | ETH YES=23% NO=74% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:10:11 | INFO     | __main__         | STATUS | BTC=$68,859 ETH=$2,067 | BTC YES=27% NO=71% | ETH YES=23% NO=74% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:10:16 | INFO     | __main__         | STATUS | BTC=$68,860 ETH=$2,067 | BTC YES=36% NO=62% | ETH YES=37% NO=59% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:10:21 | INFO     | __main__         | STATUS | BTC=$68,868 ETH=$2,067 | BTC YES=36% NO=62% | ETH YES=37% NO=59% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:10:26 | INFO     | __main__         | STATUS | BTC=$68,868 ETH=$2,067 | BTC YES=36% NO=62% | ETH YES=37% NO=59% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:10:32 | INFO     | __main__         | STATUS | BTC=$68,854 ETH=$2,067 | BTC YES=36% NO=62% | ETH YES=37% NO=59% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:10:37 | INFO     | __main__         | STATUS | BTC=$68,860 ETH=$2,067 | BTC YES=36% NO=62% | ETH YES=37% NO=59% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:10:42 | INFO     | __main__         | STATUS | BTC=$68,878 ETH=$2,068 | BTC YES=36% NO=62% | ETH YES=37% NO=59% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:10:47 | INFO     | __main__         | STATUS | BTC=$68,892 ETH=$2,068 | BTC YES=54% NO=45% | ETH YES=54% NO=43% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:10:52 | INFO     | __main__         | STATUS | BTC=$68,897 ETH=$2,068 | BTC YES=54% NO=45% | ETH YES=54% NO=43% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:10:57 | INFO     | __main__         | STATUS | BTC=$68,897 ETH=$2,068 | BTC YES=54% NO=45% | ETH YES=54% NO=43% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:11:02 | INFO     | __main__         | STATUS | BTC=$68,897 ETH=$2,068 | BTC YES=54% NO=45% | ETH YES=54% NO=43% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:11:07 | INFO     | __main__         | STATUS | BTC=$68,898 ETH=$2,068 | BTC YES=54% NO=45% | ETH YES=54% NO=43% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:11:13 | INFO     | __main__         | STATUS | BTC=$68,924 ETH=$2,069 | BTC YES=54% NO=45% | ETH YES=54% NO=43% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:11:18 | INFO     | __main__         | STATUS | BTC=$68,908 ETH=$2,069 | BTC YES=70% NO=28% | ETH YES=72% NO=27% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:11:23 | INFO     | __main__         | STATUS | BTC=$68,901 ETH=$2,068 | BTC YES=70% NO=28% | ETH YES=72% NO=27% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:11:28 | INFO     | __main__         | STATUS | BTC=$68,906 ETH=$2,069 | BTC YES=70% NO=28% | ETH YES=72% NO=27% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:11:33 | INFO     | __main__         | STATUS | BTC=$68,907 ETH=$2,068 | BTC YES=70% NO=28% | ETH YES=72% NO=27% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:11:38 | INFO     | __main__         | STATUS | BTC=$68,908 ETH=$2,069 | BTC YES=70% NO=28% | ETH YES=72% NO=27% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:11:43 | INFO     | __main__         | STATUS | BTC=$68,906 ETH=$2,068 | BTC YES=70% NO=28% | ETH YES=72% NO=27% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:11:48 | INFO     | __main__         | STATUS | BTC=$68,906 ETH=$2,068 | BTC YES=65% NO=33% | ETH YES=62% NO=36% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:11:54 | INFO     | __main__         | STATUS | BTC=$68,916 ETH=$2,069 | BTC YES=65% NO=33% | ETH YES=62% NO=36% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:11:59 | INFO     | __main__         | STATUS | BTC=$68,916 ETH=$2,069 | BTC YES=65% NO=33% | ETH YES=62% NO=36% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:12:04 | INFO     | __main__         | STATUS | BTC=$68,926 ETH=$2,069 | BTC YES=65% NO=33% | ETH YES=62% NO=36% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:12:09 | INFO     | __main__         | STATUS | BTC=$68,921 ETH=$2,069 | BTC YES=65% NO=33% | ETH YES=62% NO=36% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:12:14 | INFO     | __main__         | STATUS | BTC=$68,918 ETH=$2,069 | BTC YES=65% NO=33% | ETH YES=62% NO=36% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:12:19 | INFO     | __main__         | STATUS | BTC=$68,920 ETH=$2,069 | BTC YES=79% NO=18% | ETH YES=71% NO=22% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:12:24 | INFO     | __main__         | STATUS | BTC=$68,956 ETH=$2,070 | BTC YES=79% NO=18% | ETH YES=71% NO=22% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:12:29 | INFO     | __main__         | STATUS | BTC=$68,948 ETH=$2,070 | BTC YES=79% NO=18% | ETH YES=71% NO=22% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:12:35 | INFO     | __main__         | STATUS | BTC=$68,956 ETH=$2,071 | BTC YES=79% NO=18% | ETH YES=71% NO=22% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:12:40 | INFO     | __main__         | STATUS | BTC=$68,972 ETH=$2,071 | BTC YES=79% NO=18% | ETH YES=71% NO=22% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:12:45 | INFO     | __main__         | STATUS | BTC=$68,972 ETH=$2,071 | BTC YES=79% NO=18% | ETH YES=71% NO=22% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:12:50 | INFO     | __main__         | STATUS | BTC=$68,970 ETH=$2,071 | BTC YES=96% NO=3% | ETH YES=97% NO=2% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:12:55 | INFO     | __main__         | STATUS | BTC=$68,958 ETH=$2,070 | BTC YES=96% NO=3% | ETH YES=97% NO=2% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:13:00 | INFO     | __main__         | STATUS | BTC=$68,951 ETH=$2,070 | BTC YES=96% NO=3% | ETH YES=97% NO=2% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:13:05 | INFO     | __main__         | STATUS | BTC=$68,940 ETH=$2,070 | BTC YES=96% NO=3% | ETH YES=97% NO=2% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:13:10 | INFO     | __main__         | STATUS | BTC=$68,908 ETH=$2,068 | BTC YES=96% NO=3% | ETH YES=97% NO=2% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:13:16 | INFO     | __main__         | STATUS | BTC=$68,909 ETH=$2,069 | BTC YES=96% NO=3% | ETH YES=97% NO=2% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:13:21 | INFO     | __main__         | STATUS | BTC=$68,932 ETH=$2,069 | BTC YES=84% NO=15% | ETH YES=79% NO=19% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:13:26 | INFO     | __main__         | STATUS | BTC=$68,911 ETH=$2,067 | BTC YES=84% NO=15% | ETH YES=79% NO=19% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:13:31 | INFO     | __main__         | STATUS | BTC=$68,911 ETH=$2,068 | BTC YES=84% NO=15% | ETH YES=79% NO=19% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:13:36 | INFO     | __main__         | STATUS | BTC=$68,844 ETH=$2,066 | BTC YES=84% NO=15% | ETH YES=79% NO=19% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:13:41 | INFO     | __main__         | STATUS | BTC=$68,855 ETH=$2,066 | BTC YES=84% NO=15% | ETH YES=79% NO=19% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:13:46 | INFO     | __main__         | STATUS | BTC=$68,863 ETH=$2,066 | BTC YES=84% NO=15% | ETH YES=79% NO=19% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:13:51 | INFO     | __main__         | STATUS | BTC=$68,875 ETH=$2,067 | BTC YES=33% NO=65% | ETH YES=10% NO=86% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:13:56 | INFO     | __main__         | STATUS | BTC=$68,895 ETH=$2,067 | BTC YES=33% NO=65% | ETH YES=10% NO=86% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:14:02 | INFO     | __main__         | STATUS | BTC=$68,888 ETH=$2,067 | BTC YES=33% NO=65% | ETH YES=10% NO=86% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:14:07 | INFO     | __main__         | STATUS | BTC=$68,881 ETH=$2,067 | BTC YES=33% NO=65% | ETH YES=10% NO=86% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:14:12 | INFO     | __main__         | STATUS | BTC=$68,882 ETH=$2,067 | BTC YES=33% NO=65% | ETH YES=10% NO=86% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:14:17 | INFO     | __main__         | STATUS | BTC=$68,882 ETH=$2,067 | BTC YES=33% NO=65% | ETH YES=10% NO=86% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:14:22 | INFO     | __main__         | STATUS | BTC=$68,889 ETH=$2,067 | BTC YES=48% NO=46% | ETH YES=4% NO=94% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:14:27 | INFO     | __main__         | STATUS | BTC=$68,896 ETH=$2,067 | BTC YES=48% NO=46% | ETH YES=4% NO=94% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:14:32 | INFO     | __main__         | STATUS | BTC=$68,902 ETH=$2,068 | BTC YES=48% NO=46% | ETH YES=4% NO=94% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:14:38 | INFO     | __main__         | STATUS | BTC=$68,905 ETH=$2,068 | BTC YES=48% NO=46% | ETH YES=4% NO=94% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:14:43 | INFO     | __main__         | STATUS | BTC=$68,902 ETH=$2,068 | BTC YES=48% NO=46% | ETH YES=4% NO=94% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:14:48 | INFO     | __main__         | STATUS | BTC=$68,902 ETH=$2,068 | BTC YES=48% NO=46% | ETH YES=4% NO=94% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:14:53 | INFO     | __main__         | STATUS | BTC=$68,905 ETH=$2,068 | BTC YES=100% NO=0% | ETH YES=0% NO=99% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:14:58 | INFO     | __main__         | STATUS | BTC=$68,905 ETH=$2,068 | BTC YES=100% NO=0% | ETH YES=0% NO=99% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:15:03 | INFO     | __main__         | STATUS | BTC=$68,923 ETH=$2,068 | BTC YES=100% NO=0% | ETH YES=0% NO=99% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:15:09 | INFO     | __main__         | STATUS | BTC=$68,923 ETH=$2,068 | BTC YES=100% NO=0% | ETH YES=0% NO=99% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:15:14 | INFO     | __main__         | STATUS | BTC=$68,919 ETH=$2,068 | BTC YES=100% NO=0% | ETH YES=0% NO=99% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:15:19 | INFO     | __main__         | STATUS | BTC=$68,923 ETH=$2,068 | BTC YES=100% NO=0% | ETH YES=0% NO=99% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:15:24 | INFO     | __main__         | STATUS | BTC=$68,920 ETH=$2,068 | BTC YES=59% NO=40% | ETH YES=56% NO=42% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:15:29 | INFO     | __main__         | STATUS | BTC=$68,920 ETH=$2,068 | BTC YES=59% NO=40% | ETH YES=56% NO=42% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:15:34 | INFO     | __main__         | STATUS | BTC=$68,920 ETH=$2,068 | BTC YES=59% NO=40% | ETH YES=56% NO=42% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:15:39 | INFO     | __main__         | STATUS | BTC=$68,907 ETH=$2,068 | BTC YES=59% NO=40% | ETH YES=56% NO=42% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:15:44 | INFO     | __main__         | STATUS | BTC=$68,889 ETH=$2,067 | BTC YES=59% NO=40% | ETH YES=56% NO=42% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:15:50 | INFO     | __main__         | STATUS | BTC=$68,886 ETH=$2,067 | BTC YES=59% NO=40% | ETH YES=56% NO=42% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:15:55 | INFO     | __main__         | STATUS | BTC=$68,884 ETH=$2,067 | BTC YES=47% NO=52% | ETH YES=50% NO=48% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:16:00 | INFO     | __main__         | STATUS | BTC=$68,894 ETH=$2,067 | BTC YES=47% NO=52% | ETH YES=50% NO=48% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:16:05 | INFO     | __main__         | STATUS | BTC=$68,892 ETH=$2,067 | BTC YES=47% NO=52% | ETH YES=50% NO=48% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:16:10 | INFO     | __main__         | STATUS | BTC=$68,900 ETH=$2,067 | BTC YES=47% NO=52% | ETH YES=50% NO=48% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:16:15 | INFO     | __main__         | STATUS | BTC=$68,893 ETH=$2,067 | BTC YES=47% NO=52% | ETH YES=50% NO=48% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:16:20 | INFO     | __main__         | STATUS | BTC=$68,897 ETH=$2,067 | BTC YES=47% NO=52% | ETH YES=50% NO=48% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:16:26 | INFO     | __main__         | STATUS | BTC=$68,892 ETH=$2,067 | BTC YES=49% NO=50% | ETH YES=47% NO=50% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:16:31 | INFO     | __main__         | STATUS | BTC=$68,879 ETH=$2,067 | BTC YES=49% NO=50% | ETH YES=47% NO=50% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:16:36 | INFO     | __main__         | STATUS | BTC=$68,879 ETH=$2,067 | BTC YES=49% NO=50% | ETH YES=47% NO=50% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:16:41 | INFO     | __main__         | STATUS | BTC=$68,889 ETH=$2,067 | BTC YES=49% NO=50% | ETH YES=47% NO=50% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:16:46 | INFO     | __main__         | STATUS | BTC=$68,904 ETH=$2,067 | BTC YES=49% NO=50% | ETH YES=47% NO=50% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:16:51 | INFO     | __main__         | STATUS | BTC=$68,905 ETH=$2,067 | BTC YES=49% NO=50% | ETH YES=47% NO=50% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:16:56 | INFO     | __main__         | STATUS | BTC=$68,905 ETH=$2,067 | BTC YES=52% NO=46% | ETH YES=50% NO=48% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:17:01 | INFO     | __main__         | STATUS | BTC=$68,905 ETH=$2,068 | BTC YES=52% NO=46% | ETH YES=50% NO=48% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:17:07 | INFO     | __main__         | STATUS | BTC=$68,919 ETH=$2,068 | BTC YES=52% NO=46% | ETH YES=50% NO=48% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:17:12 | INFO     | __main__         | STATUS | BTC=$68,908 ETH=$2,068 | BTC YES=52% NO=46% | ETH YES=50% NO=48% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:17:17 | INFO     | __main__         | STATUS | BTC=$68,908 ETH=$2,068 | BTC YES=52% NO=46% | ETH YES=50% NO=48% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:17:22 | INFO     | __main__         | STATUS | BTC=$68,905 ETH=$2,068 | BTC YES=52% NO=46% | ETH YES=50% NO=48% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:17:27 | INFO     | __main__         | STATUS | BTC=$68,908 ETH=$2,068 | BTC YES=51% NO=47% | ETH YES=53% NO=45% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:17:32 | INFO     | __main__         | STATUS | BTC=$68,908 ETH=$2,068 | BTC YES=51% NO=47% | ETH YES=53% NO=45% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:17:37 | INFO     | __main__         | STATUS | BTC=$68,911 ETH=$2,068 | BTC YES=51% NO=47% | ETH YES=53% NO=45% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:17:42 | INFO     | __main__         | STATUS | BTC=$68,911 ETH=$2,068 | BTC YES=51% NO=47% | ETH YES=53% NO=45% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:17:48 | INFO     | __main__         | STATUS | BTC=$68,907 ETH=$2,068 | BTC YES=51% NO=47% | ETH YES=53% NO=45% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:17:53 | INFO     | __main__         | STATUS | BTC=$68,899 ETH=$2,068 | BTC YES=51% NO=47% | ETH YES=53% NO=45% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:17:58 | INFO     | __main__         | STATUS | BTC=$68,901 ETH=$2,068 | BTC YES=49% NO=50% | ETH YES=52% NO=45% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:18:03 | INFO     | __main__         | STATUS | BTC=$68,891 ETH=$2,068 | BTC YES=49% NO=50% | ETH YES=52% NO=45% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:18:08 | INFO     | __main__         | STATUS | BTC=$68,895 ETH=$2,068 | BTC YES=49% NO=50% | ETH YES=52% NO=45% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:18:13 | INFO     | __main__         | STATUS | BTC=$68,870 ETH=$2,067 | BTC YES=49% NO=50% | ETH YES=52% NO=45% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:18:18 | INFO     | __main__         | STATUS | BTC=$68,876 ETH=$2,067 | BTC YES=49% NO=50% | ETH YES=52% NO=45% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:18:24 | INFO     | __main__         | STATUS | BTC=$68,876 ETH=$2,067 | BTC YES=49% NO=50% | ETH YES=52% NO=45% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:18:29 | INFO     | __main__         | STATUS | BTC=$68,886 ETH=$2,067 | BTC YES=43% NO=55% | ETH YES=44% NO=53% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:18:34 | INFO     | __main__         | STATUS | BTC=$68,885 ETH=$2,067 | BTC YES=43% NO=55% | ETH YES=44% NO=53% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:18:39 | INFO     | __main__         | STATUS | BTC=$68,888 ETH=$2,067 | BTC YES=43% NO=55% | ETH YES=44% NO=53% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:18:44 | INFO     | __main__         | STATUS | BTC=$68,890 ETH=$2,067 | BTC YES=43% NO=55% | ETH YES=44% NO=53% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:18:49 | INFO     | __main__         | STATUS | BTC=$68,885 ETH=$2,067 | BTC YES=43% NO=55% | ETH YES=44% NO=53% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:18:54 | INFO     | __main__         | STATUS | BTC=$68,884 ETH=$2,067 | BTC YES=43% NO=55% | ETH YES=44% NO=53% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:18:59 | INFO     | __main__         | STATUS | BTC=$68,884 ETH=$2,067 | BTC YES=45% NO=54% | ETH YES=46% NO=51% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:19:05 | INFO     | __main__         | STATUS | BTC=$68,885 ETH=$2,067 | BTC YES=45% NO=54% | ETH YES=46% NO=51% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:19:10 | INFO     | __main__         | STATUS | BTC=$68,885 ETH=$2,067 | BTC YES=45% NO=54% | ETH YES=46% NO=51% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:19:15 | INFO     | __main__         | STATUS | BTC=$68,879 ETH=$2,067 | BTC YES=45% NO=54% | ETH YES=46% NO=51% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:19:20 | INFO     | __main__         | STATUS | BTC=$68,857 ETH=$2,066 | BTC YES=45% NO=54% | ETH YES=46% NO=51% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:19:25 | INFO     | __main__         | STATUS | BTC=$68,868 ETH=$2,066 | BTC YES=45% NO=54% | ETH YES=46% NO=51% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:19:30 | INFO     | strategy         | ENTRY SIGNAL: KXBTC15M-26MAR261830-30 | side=yes | odds=35.00% | 13 contracts @ 36¢ | reason=YES odds 35.00% < threshold 40.00%
+2026-03-26T18:19:30 | ERROR    | kalshi_client    | Request failed (attempt 1/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:19:31 | ERROR    | kalshi_client    | Request failed (attempt 2/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:19:33 | ERROR    | kalshi_client    | Request failed (attempt 3/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:19:33 | ERROR    | order_manager    | Failed to place entry on KXBTC15M-26MAR261830-30: 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:19:33 | INFO     | strategy         | ENTRY SIGNAL: KXETH15M-26MAR261830-30 | side=yes | odds=37.00% | 13 contracts @ 38¢ | reason=YES odds 37.00% < threshold 40.00%
+2026-03-26T18:19:33 | ERROR    | kalshi_client    | Request failed (attempt 1/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:19:34 | ERROR    | kalshi_client    | Request failed (attempt 2/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:19:37 | ERROR    | kalshi_client    | Request failed (attempt 3/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:19:37 | ERROR    | order_manager    | Failed to place entry on KXETH15M-26MAR261830-30: 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:19:37 | INFO     | __main__         | STATUS | BTC=$68,874 ETH=$2,067 | BTC YES=35% NO=64% | ETH YES=37% NO=60% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:19:42 | INFO     | strategy         | ENTRY SIGNAL: KXBTC15M-26MAR261830-30 | side=yes | odds=35.00% | 13 contracts @ 36¢ | reason=YES odds 35.00% < threshold 40.00%
+2026-03-26T18:19:42 | ERROR    | kalshi_client    | Request failed (attempt 1/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:19:43 | ERROR    | kalshi_client    | Request failed (attempt 2/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:19:45 | ERROR    | kalshi_client    | Request failed (attempt 3/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:19:45 | ERROR    | order_manager    | Failed to place entry on KXBTC15M-26MAR261830-30: 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:19:45 | INFO     | strategy         | ENTRY SIGNAL: KXETH15M-26MAR261830-30 | side=yes | odds=37.00% | 13 contracts @ 38¢ | reason=YES odds 37.00% < threshold 40.00%
+2026-03-26T18:19:45 | ERROR    | kalshi_client    | Request failed (attempt 1/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:19:46 | ERROR    | kalshi_client    | Request failed (attempt 2/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:19:48 | ERROR    | kalshi_client    | Request failed (attempt 3/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:19:48 | ERROR    | order_manager    | Failed to place entry on KXETH15M-26MAR261830-30: 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:19:48 | INFO     | __main__         | STATUS | BTC=$68,882 ETH=$2,067 | BTC YES=35% NO=64% | ETH YES=37% NO=60% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:19:53 | INFO     | strategy         | ENTRY SIGNAL: KXBTC15M-26MAR261830-30 | side=yes | odds=35.00% | 13 contracts @ 36¢ | reason=YES odds 35.00% < threshold 40.00%
+2026-03-26T18:19:53 | ERROR    | kalshi_client    | Request failed (attempt 1/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:19:54 | ERROR    | kalshi_client    | Request failed (attempt 2/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:19:56 | ERROR    | kalshi_client    | Request failed (attempt 3/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:19:56 | ERROR    | order_manager    | Failed to place entry on KXBTC15M-26MAR261830-30: 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:19:56 | INFO     | __main__         | STATUS | BTC=$68,883 ETH=$2,067 | BTC YES=35% NO=64% | ETH YES=49% NO=49% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:20:01 | INFO     | __main__         | STATUS | BTC=$68,887 ETH=$2,067 | BTC YES=48% NO=50% | ETH YES=49% NO=49% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:20:07 | INFO     | __main__         | STATUS | BTC=$68,870 ETH=$2,067 | BTC YES=48% NO=50% | ETH YES=49% NO=49% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:20:12 | INFO     | __main__         | STATUS | BTC=$68,870 ETH=$2,067 | BTC YES=48% NO=50% | ETH YES=49% NO=49% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:20:17 | INFO     | __main__         | STATUS | BTC=$68,870 ETH=$2,067 | BTC YES=48% NO=50% | ETH YES=49% NO=49% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:20:22 | INFO     | __main__         | STATUS | BTC=$68,870 ETH=$2,067 | BTC YES=48% NO=50% | ETH YES=49% NO=49% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:20:27 | INFO     | __main__         | STATUS | BTC=$68,870 ETH=$2,067 | BTC YES=48% NO=50% | ETH YES=49% NO=49% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:20:32 | INFO     | strategy         | ENTRY SIGNAL: KXBTC15M-26MAR261830-30 | side=yes | odds=39.00% | 12 contracts @ 40¢ | reason=YES odds 39.00% < threshold 40.00%
+2026-03-26T18:20:32 | ERROR    | kalshi_client    | Request failed (attempt 1/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:20:33 | ERROR    | kalshi_client    | Request failed (attempt 2/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:20:35 | ERROR    | kalshi_client    | Request failed (attempt 3/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:20:35 | ERROR    | order_manager    | Failed to place entry on KXBTC15M-26MAR261830-30: 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:20:35 | INFO     | __main__         | STATUS | BTC=$68,876 ETH=$2,067 | BTC YES=39% NO=60% | ETH YES=49% NO=49% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:20:40 | INFO     | strategy         | ENTRY SIGNAL: KXBTC15M-26MAR261830-30 | side=yes | odds=39.00% | 12 contracts @ 40¢ | reason=YES odds 39.00% < threshold 40.00%
+2026-03-26T18:20:41 | ERROR    | kalshi_client    | Request failed (attempt 1/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:20:42 | ERROR    | kalshi_client    | Request failed (attempt 2/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:20:44 | ERROR    | kalshi_client    | Request failed (attempt 3/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:20:44 | ERROR    | order_manager    | Failed to place entry on KXBTC15M-26MAR261830-30: 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:20:44 | INFO     | __main__         | STATUS | BTC=$68,876 ETH=$2,067 | BTC YES=39% NO=60% | ETH YES=42% NO=55% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:20:49 | INFO     | strategy         | ENTRY SIGNAL: KXBTC15M-26MAR261830-30 | side=yes | odds=39.00% | 12 contracts @ 40¢ | reason=YES odds 39.00% < threshold 40.00%
+2026-03-26T18:20:49 | ERROR    | kalshi_client    | Request failed (attempt 1/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:20:50 | ERROR    | kalshi_client    | Request failed (attempt 2/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:20:52 | ERROR    | kalshi_client    | Request failed (attempt 3/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:20:52 | ERROR    | order_manager    | Failed to place entry on KXBTC15M-26MAR261830-30: 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:20:52 | INFO     | __main__         | STATUS | BTC=$68,876 ETH=$2,067 | BTC YES=39% NO=60% | ETH YES=42% NO=56% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:20:57 | INFO     | strategy         | ENTRY SIGNAL: KXBTC15M-26MAR261830-30 | side=yes | odds=39.00% | 12 contracts @ 40¢ | reason=YES odds 39.00% < threshold 40.00%
+2026-03-26T18:20:57 | ERROR    | kalshi_client    | Request failed (attempt 1/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:20:58 | ERROR    | kalshi_client    | Request failed (attempt 2/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:21:00 | ERROR    | kalshi_client    | Request failed (attempt 3/3): 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:21:00 | ERROR    | order_manager    | Failed to place entry on KXBTC15M-26MAR261830-30: 401 Client Error: Unauthorized for url: https://api.elections.kalshi.com/trade-api/v2/portfolio/orders
+2026-03-26T18:21:00 | INFO     | __main__         | STATUS | BTC=$68,876 ETH=$2,067 | BTC YES=39% NO=60% | ETH YES=42% NO=56% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:21:05 | INFO     | __main__         | STATUS | BTC=$68,889 ETH=$2,067 | BTC YES=40% NO=58% | ETH YES=42% NO=56% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:21:11 | INFO     | __main__         | STATUS | BTC=$68,892 ETH=$2,067 | BTC YES=40% NO=58% | ETH YES=42% NO=56% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:21:16 | INFO     | __main__         | STATUS | BTC=$68,892 ETH=$2,068 | BTC YES=40% NO=58% | ETH YES=42% NO=56% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:21:21 | INFO     | __main__         | STATUS | BTC=$68,903 ETH=$2,068 | BTC YES=40% NO=58% | ETH YES=50% NO=47% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:21:26 | INFO     | __main__         | STATUS | BTC=$68,907 ETH=$2,068 | BTC YES=40% NO=58% | ETH YES=50% NO=47% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:21:31 | INFO     | __main__         | STATUS | BTC=$68,908 ETH=$2,068 | BTC YES=55% NO=44% | ETH YES=50% NO=47% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:21:36 | INFO     | __main__         | STATUS | BTC=$68,871 ETH=$2,068 | BTC YES=55% NO=44% | ETH YES=50% NO=47% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:21:41 | INFO     | __main__         | STATUS | BTC=$68,854 ETH=$2,067 | BTC YES=55% NO=44% | ETH YES=50% NO=47% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:21:46 | INFO     | __main__         | STATUS | BTC=$68,854 ETH=$2,067 | BTC YES=55% NO=44% | ETH YES=50% NO=47% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:21:52 | INFO     | __main__         | STATUS | BTC=$68,854 ETH=$2,067 | BTC YES=55% NO=44% | ETH YES=42% NO=55% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:21:57 | INFO     | __main__         | STATUS | BTC=$68,850 ETH=$2,067 | BTC YES=55% NO=44% | ETH YES=42% NO=55% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:22:02 | INFO     | __main__         | STATUS | BTC=$68,844 ETH=$2,067 | BTC YES=32% NO=67% | ETH YES=42% NO=55% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:22:07 | INFO     | __main__         | STATUS | BTC=$68,844 ETH=$2,067 | BTC YES=32% NO=67% | ETH YES=42% NO=55% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:22:12 | INFO     | __main__         | STATUS | BTC=$68,844 ETH=$2,067 | BTC YES=32% NO=67% | ETH YES=42% NO=55% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:22:17 | INFO     | __main__         | STATUS | BTC=$68,860 ETH=$2,067 | BTC YES=32% NO=67% | ETH YES=42% NO=55% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:22:22 | INFO     | __main__         | STATUS | BTC=$68,860 ETH=$2,067 | BTC YES=32% NO=67% | ETH YES=47% NO=51% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:22:27 | INFO     | __main__         | STATUS | BTC=$68,866 ETH=$2,067 | BTC YES=32% NO=67% | ETH YES=47% NO=51% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:22:32 | INFO     | __main__         | STATUS | BTC=$68,890 ETH=$2,068 | BTC YES=35% NO=63% | ETH YES=47% NO=51% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:22:38 | INFO     | __main__         | STATUS | BTC=$68,890 ETH=$2,068 | BTC YES=35% NO=63% | ETH YES=47% NO=51% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:22:43 | INFO     | __main__         | STATUS | BTC=$68,890 ETH=$2,068 | BTC YES=35% NO=63% | ETH YES=47% NO=51% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:22:48 | INFO     | __main__         | STATUS | BTC=$68,890 ETH=$2,068 | BTC YES=35% NO=63% | ETH YES=47% NO=51% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:22:53 | INFO     | __main__         | STATUS | BTC=$68,890 ETH=$2,068 | BTC YES=35% NO=63% | ETH YES=56% NO=41% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:22:58 | INFO     | __main__         | STATUS | BTC=$68,876 ETH=$2,068 | BTC YES=35% NO=63% | ETH YES=56% NO=41% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:23:03 | INFO     | __main__         | STATUS | BTC=$68,877 ETH=$2,068 | BTC YES=48% NO=50% | ETH YES=56% NO=41% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:23:08 | INFO     | __main__         | STATUS | BTC=$68,878 ETH=$2,067 | BTC YES=48% NO=50% | ETH YES=56% NO=41% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:23:13 | INFO     | __main__         | STATUS | BTC=$68,878 ETH=$2,067 | BTC YES=48% NO=50% | ETH YES=56% NO=41% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:23:19 | INFO     | __main__         | STATUS | BTC=$68,866 ETH=$2,067 | BTC YES=48% NO=50% | ETH YES=56% NO=41% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:23:24 | INFO     | __main__         | STATUS | BTC=$68,872 ETH=$2,067 | BTC YES=48% NO=50% | ETH YES=46% NO=51% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:23:29 | INFO     | __main__         | STATUS | BTC=$68,872 ETH=$2,067 | BTC YES=48% NO=50% | ETH YES=46% NO=51% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:23:34 | INFO     | __main__         | STATUS | BTC=$68,875 ETH=$2,067 | BTC YES=39% NO=60% | ETH YES=46% NO=51% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:23:39 | INFO     | __main__         | STATUS | BTC=$68,880 ETH=$2,068 | BTC YES=39% NO=60% | ETH YES=46% NO=51% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:23:44 | INFO     | __main__         | STATUS | BTC=$68,887 ETH=$2,068 | BTC YES=39% NO=60% | ETH YES=46% NO=51% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:23:49 | INFO     | __main__         | STATUS | BTC=$68,883 ETH=$2,068 | BTC YES=39% NO=60% | ETH YES=46% NO=51% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:23:55 | INFO     | __main__         | STATUS | BTC=$68,883 ETH=$2,068 | BTC YES=39% NO=60% | ETH YES=56% NO=41% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:24:00 | INFO     | __main__         | STATUS | BTC=$68,877 ETH=$2,068 | BTC YES=39% NO=60% | ETH YES=56% NO=41% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:24:05 | INFO     | __main__         | STATUS | BTC=$68,871 ETH=$2,067 | BTC YES=46% NO=52% | ETH YES=56% NO=41% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:24:10 | INFO     | __main__         | STATUS | BTC=$68,871 ETH=$2,067 | BTC YES=46% NO=52% | ETH YES=56% NO=41% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:24:15 | INFO     | __main__         | STATUS | BTC=$68,756 ETH=$2,061 | BTC YES=46% NO=52% | ETH YES=56% NO=41% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:24:20 | INFO     | __main__         | STATUS | BTC=$68,730 ETH=$2,060 | BTC YES=46% NO=52% | ETH YES=56% NO=41% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:24:25 | INFO     | __main__         | STATUS | BTC=$68,688 ETH=$2,059 | BTC YES=46% NO=52% | ETH YES=6% NO=93% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:24:30 | INFO     | __main__         | STATUS | BTC=$68,662 ETH=$2,058 | BTC YES=46% NO=52% | ETH YES=6% NO=93% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:24:36 | INFO     | __main__         | STATUS | BTC=$68,709 ETH=$2,060 | BTC YES=5% NO=94% | ETH YES=6% NO=93% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:24:41 | INFO     | __main__         | STATUS | BTC=$68,709 ETH=$2,059 | BTC YES=5% NO=94% | ETH YES=6% NO=93% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:24:46 | INFO     | __main__         | STATUS | BTC=$68,712 ETH=$2,060 | BTC YES=5% NO=94% | ETH YES=6% NO=93% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:24:51 | INFO     | __main__         | STATUS | BTC=$68,717 ETH=$2,061 | BTC YES=5% NO=94% | ETH YES=6% NO=93% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:24:56 | INFO     | __main__         | STATUS | BTC=$68,711 ETH=$2,061 | BTC YES=5% NO=94% | ETH YES=5% NO=92% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:25:01 | INFO     | __main__         | STATUS | BTC=$68,701 ETH=$2,060 | BTC YES=5% NO=94% | ETH YES=5% NO=92% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:25:06 | INFO     | __main__         | STATUS | BTC=$68,697 ETH=$2,060 | BTC YES=6% NO=93% | ETH YES=5% NO=92% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:25:11 | INFO     | __main__         | STATUS | BTC=$68,701 ETH=$2,060 | BTC YES=6% NO=93% | ETH YES=5% NO=92% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:25:17 | INFO     | __main__         | STATUS | BTC=$68,717 ETH=$2,061 | BTC YES=6% NO=93% | ETH YES=5% NO=92% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:25:22 | INFO     | __main__         | STATUS | BTC=$68,721 ETH=$2,061 | BTC YES=6% NO=93% | ETH YES=5% NO=92% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:25:27 | INFO     | __main__         | STATUS | BTC=$68,722 ETH=$2,061 | BTC YES=6% NO=93% | ETH YES=4% NO=94% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:25:32 | INFO     | __main__         | STATUS | BTC=$68,723 ETH=$2,061 | BTC YES=6% NO=93% | ETH YES=4% NO=94% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:25:37 | INFO     | __main__         | STATUS | BTC=$68,722 ETH=$2,061 | BTC YES=3% NO=96% | ETH YES=4% NO=94% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:25:42 | INFO     | __main__         | STATUS | BTC=$68,717 ETH=$2,061 | BTC YES=3% NO=96% | ETH YES=4% NO=94% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:25:47 | INFO     | __main__         | STATUS | BTC=$68,715 ETH=$2,061 | BTC YES=3% NO=96% | ETH YES=4% NO=94% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:25:52 | INFO     | __main__         | STATUS | BTC=$68,712 ETH=$2,060 | BTC YES=3% NO=96% | ETH YES=4% NO=94% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:25:58 | INFO     | __main__         | STATUS | BTC=$68,683 ETH=$2,059 | BTC YES=3% NO=96% | ETH YES=3% NO=94% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:26:03 | INFO     | __main__         | STATUS | BTC=$68,708 ETH=$2,060 | BTC YES=3% NO=96% | ETH YES=3% NO=94% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:26:08 | INFO     | __main__         | STATUS | BTC=$68,711 ETH=$2,060 | BTC YES=3% NO=96% | ETH YES=3% NO=94% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:26:13 | INFO     | __main__         | STATUS | BTC=$68,723 ETH=$2,060 | BTC YES=3% NO=96% | ETH YES=3% NO=94% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:26:18 | INFO     | __main__         | STATUS | BTC=$68,691 ETH=$2,059 | BTC YES=3% NO=96% | ETH YES=3% NO=94% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:26:23 | INFO     | __main__         | STATUS | BTC=$68,674 ETH=$2,059 | BTC YES=3% NO=96% | ETH YES=3% NO=94% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:26:28 | INFO     | __main__         | STATUS | BTC=$68,642 ETH=$2,057 | BTC YES=3% NO=96% | ETH YES=0% NO=98% | positions=0 | daily_pnl=$+0.00 | kill=False
+2026-03-26T18:26:33 | INFO     | __main__         | STATUS | BTC=$68,632 ETH=$2,057 | BTC YES=3% NO=96% | ETH YES=0% NO=98% | positions=0 | daily_pnl=$+0.00 | kill=False

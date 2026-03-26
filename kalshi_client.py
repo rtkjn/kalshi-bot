@@ -43,7 +43,10 @@ class KalshiClient:
 
     def _sign_request(self, method: str, path: str, body: str = "") -> dict:
         ts = str(int(time.time() * 1000))
-        msg = ts + method.upper() + path + body
+        # Kalshi signing: timestamp + METHOD + path (no body, no query params)
+        # See: docs.kalshi.com/getting_started/quick_start_authenticated_requests
+        path_without_query = path.split("?")[0]
+        msg = ts + method.upper() + path_without_query
         signature = self._private_key.sign(
             msg.encode("utf-8"),
             padding.PSS(
@@ -126,13 +129,16 @@ class KalshiClient:
                         f"{count} contracts @ {price_cents}¢ on {ticker}")
             return {"order_id": "dry_run", "status": "simulated"}
 
+        # Kalshi requires yes_price or no_price (integer cents 1-99)
+        # NOT limit_price — that field does not exist in their API
+        price_field = "yes_price" if side == "yes" else "no_price"
         body = {
             "ticker": ticker,
             "action": "buy",
             "type": "limit",
             "side": side,
             "count": count,
-            "limit_price": price_cents,
+            price_field: price_cents,
         }
         return self._request("POST", "/portfolio/orders", body)
 
