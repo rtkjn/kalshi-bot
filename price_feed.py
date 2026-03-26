@@ -15,7 +15,7 @@ import websockets
 
 logger = logging.getLogger(__name__)
 
-BINANCE_WS = "wss://stream.binance.com:9443/stream"
+BINANCE_WS = "wss://stream.binance.com:443/stream"
 
 # Rolling window of (timestamp, price) tuples — last 2 minutes
 PRICE_HISTORY_SECONDS = 120

@@ -6,6 +6,7 @@ Every other module imports from here — never reads .env directly.
 
 import os
 from dataclasses import dataclass
+from typing import List
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -34,7 +35,7 @@ class Config:
     cooldown_after_loss_seconds: int
 
     # --- Assets ---
-    assets: list[str]             # e.g. ["BTC", "ETH"]
+    assets: List[str]             # e.g. ["BTC", "ETH"]
 
 
 def load_config() -> Config:

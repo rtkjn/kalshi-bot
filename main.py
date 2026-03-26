@@ -38,8 +38,8 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 POLL_INTERVAL = 15       # seconds between market scans
-BTC_SERIES    = "KXBTC"  # Kalshi series ticker prefix for BTC 15-min markets
-ETH_SERIES    = "KXETH"  # Kalshi series ticker prefix for ETH 15-min markets
+BTC_SERIES    = "KXBTC15M"  # Kalshi series ticker prefix for BTC 15-min markets
+ETH_SERIES    = "KXETH15M"  # Kalshi series ticker prefix for ETH 15-min markets
 
 
 async def run_bot():
@@ -89,7 +89,7 @@ async def run_bot():
             btc_price = price_feed.get_price("BTC")
             eth_price = price_feed.get_price("ETH")
             logger.info(
-                f"STATUS | BTC=${btc_price:,.0f} ETH=${eth_price:,.0f} | "
+                f"STATUS | BTC=${btc_price or 0:,.0f} ETH=${eth_price or 0:,.0f} | "
                 f"positions={status['open_positions']} | "
                 f"daily_pnl=${status['daily_pnl']:+.2f} | "
                 f"kill={status['kill_switch']}"
