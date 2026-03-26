@@ -37,7 +37,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-POLL_INTERVAL = 15       # seconds between market scans
+POLL_INTERVAL = 5       # seconds between market scans
 BTC_SERIES    = "KXBTC15M"  # Kalshi series ticker prefix for BTC 15-min markets
 ETH_SERIES    = "KXETH15M"  # Kalshi series ticker prefix for ETH 15-min markets
 
@@ -120,6 +120,10 @@ async def trading_cycle(config, client, signal_engine, strategy,
     if not markets:
         logger.debug("No active markets found")
         return
+
+    # Deduplicate markets by ticker — API can return same market twice
+    seen = set()
+    markets = [m for m in markets if m.get('ticker') not in seen and not seen.add(m.get('ticker'))]
 
     open_tickers = order_manager.get_open_tickers()
 

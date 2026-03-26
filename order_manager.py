@@ -45,6 +45,11 @@ class OrderManager:
             return False
 
         ticker = decision.ticker
+
+        # Hard guard — never enter the same ticker twice
+        if ticker in self.positions:
+            logger.warning(f"Duplicate entry blocked for {ticker} — already in positions")
+            return False
         contracts = max(1, int(
             decision.size_dollars / (decision.price_cents / 100)
         ))
