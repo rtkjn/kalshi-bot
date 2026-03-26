@@ -76,13 +76,24 @@ async def run_bot():
                 await asyncio.sleep(60)
                 continue
 
+            markets_snapshot = []
             try:
-                await trading_cycle(
+                markets_snapshot = await trading_cycle(
                     config, client, signal_engine, strategy,
                     order_manager, price_feed
-                )
+                ) or []
             except Exception as e:
                 logger.error(f"Trading cycle error: {e}", exc_info=True)
+
+            # Build odds string from latest market snapshot
+            odds_parts = []
+            for m in markets_snapshot:
+                asset = "BTC" if "BTC" in m.get("ticker","").upper() else "ETH"
+                yes = float(m.get("yes_bid_dollars") or 0)
+                no  = float(m.get("no_bid_dollars") or 0)
+                if yes > 0 or no > 0:
+                    odds_parts.append(f"{asset} YES={yes:.0%} NO={no:.0%}")
+            odds_str = " | ".join(odds_parts) if odds_parts else "no markets"
 
             # Status line
             status = risk_manager.status()
@@ -90,6 +101,7 @@ async def run_bot():
             eth_price = price_feed.get_price("ETH")
             logger.info(
                 f"STATUS | BTC=${btc_price or 0:,.0f} ETH=${eth_price or 0:,.0f} | "
+                f"{odds_str} | "
                 f"positions={status['open_positions']} | "
                 f"daily_pnl=${status['daily_pnl']:+.2f} | "
                 f"kill={status['kill_switch']}"
@@ -161,6 +173,8 @@ async def trading_cycle(config, client, signal_engine, strategy,
             })
             if decision.action == "sell":
                 order_manager.execute_exit(decision)
+
+    return markets  # return so caller can log odds
 
 
 if __name__ == "__main__":
