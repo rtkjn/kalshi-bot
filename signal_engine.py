@@ -95,7 +95,7 @@ class SignalEngine:
         current_price = float(market.get(price_key) or 0)
 
         # Exit if odds recovered to target range
-        if self.config.exit_odds_low <= current_price <= self.config.exit_odds_high:
+        if current_price >= self.config.exit_odds_low:
             return Signal(SignalType.EXIT, ticker, side, current_price, asset,
                           f"Odds recovered to {current_price:.2%} — take profit")
 
