@@ -2,10 +2,11 @@
 order_manager.py
 Handles the full lifecycle of orders using fill-or-kill market orders.
 
-Key change from v1.x: switched from limit orders to buy_max_cost FoK orders.
-- No resting orders on the book
-- Fills immediately at current market price or cancels entirely
-- Eliminates the duplicate order accumulation bug
+v2.0: switched from limit orders to buy_max_cost FoK orders.
+- price_cents passed as ceiling price to Kalshi
+- count calculated from budget / price
+- buy_max_cost caps total spend and triggers FoK behavior
+- No resting orders ever left on the book
 """
 
 import logging
@@ -81,7 +82,7 @@ class OrderManager:
     # ---------------------------------------------------------------- entries
 
     def execute_entry(self, decision: TradeDecision) -> bool:
-        """Place a FoK entry. Spends up to trade_size_dollars at current market price."""
+        """Place a FoK entry. Price ceiling from signal, spend capped at trade_size_dollars."""
         if decision.action != "buy":
             return False
 
@@ -96,31 +97,33 @@ class OrderManager:
             logger.warning(f"Entry blocked: {ticker} in recently_closed guard")
             return False
 
-        # Enforce position limit before placing any order
         allowed, reason = self.risk_manager.can_open_position(ticker)
         if not allowed:
             logger.info(f"Entry blocked by risk manager: {reason}")
             return False
 
         max_cost = self.config.trade_size_dollars
+        # Price ceiling: current odds + 2c so we're competitive but not reckless
+        price_ceil = min(99, (decision.price_cents or 50) + 2)
 
         try:
             result = self.client.place_order(
                 ticker=ticker,
                 side=decision.side,
+                price_cents=price_ceil,
                 max_cost_dollars=max_cost,
             )
 
-            order = result.get("order", {})
+            order    = result.get("order", {})
             order_id = order.get("order_id", "unknown")
-            status = order.get("status", "")
+            status   = order.get("status", "")
 
             if status == "canceled":
-                logger.warning(f"Entry FoK canceled (no liquidity): {ticker}")
+                logger.warning(f"Entry FoK canceled (no liquidity at {price_ceil}c): {ticker}")
                 return False
 
-            fill_cost = float(order.get("taker_fill_cost_dollars") or max_cost)
-            est_contracts = max(1, int(fill_cost / (decision.price_cents / 100))) if decision.price_cents else 1
+            fill_cost     = float(order.get("taker_fill_cost_dollars") or max_cost)
+            est_contracts = max(1, int(fill_cost / (price_ceil / 100)))
 
             self.positions[ticker] = OpenPosition(
                 ticker=ticker, side=decision.side, contracts=est_contracts,
@@ -129,10 +132,11 @@ class OrderManager:
             self.risk_manager.on_position_opened(ticker)
             self.trade_logger.log_entry(
                 ticker=ticker, side=decision.side, contracts=est_contracts,
-                price_cents=decision.price_cents, cost_dollars=fill_cost,
+                price_cents=price_ceil, cost_dollars=fill_cost,
                 order_id=order_id, reason=decision.reason,
             )
-            logger.info(f"ENTRY PLACED: {ticker} | {decision.side} | FoK ~${fill_cost:.2f}")
+            logger.info(f"ENTRY PLACED: {ticker} | {decision.side} | "
+                        f"FoK {est_contracts}x@{price_ceil}c | ~${fill_cost:.2f}")
             return True
 
         except Exception as e:
@@ -153,7 +157,8 @@ class OrderManager:
             return False
 
         try:
-            price_field = "yes_price" if position.side == "yes" else "no_price"
+            price_field  = "yes_price" if position.side == "yes" else "no_price"
+            exit_price   = max(1, (decision.price_cents or 50) - 2)
             body = {
                 "ticker": ticker,
                 "action": "sell",
@@ -161,7 +166,7 @@ class OrderManager:
                 "count": position.contracts,
                 "reduce_only": True,
                 "time_in_force": "fill_or_kill",
-                price_field: max(1, (decision.price_cents or 50) - 2),
+                price_field: exit_price,
             }
             result = self.client._request("POST", "/portfolio/orders", body)
             order  = result.get("order", {})
@@ -184,7 +189,7 @@ class OrderManager:
             self._mark_recently_closed(ticker)
 
             logger.info(f"EXIT PLACED: {ticker} | {position.side} | "
-                        f"{position.contracts}x | pnl=~${pnl:+.2f}")
+                        f"{position.contracts}x@{exit_price}c | pnl=~${pnl:+.2f}")
             return True
 
         except Exception as e:

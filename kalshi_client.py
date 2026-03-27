@@ -27,9 +27,7 @@ class KalshiClient:
         self.session = requests.Session()
         self._private_key = self._load_private_key()
         self._last_api_call = 0.0
-        self._min_interval = 0.1  # max 10 requests/sec
-
-    # ------------------------------------------------------------------ auth
+        self._min_interval = 0.1
 
     def _load_private_key(self):
         key_path = Path(self.config.private_key_path)
@@ -58,8 +56,6 @@ class KalshiClient:
             "KALSHI-ACCESS-SIGNATURE": base64.b64encode(signature).decode("utf-8"),
             "Content-Type": "application/json",
         }
-
-    # ------------------------------------------------------------------ http
 
     def _rate_limit(self):
         elapsed = time.time() - self._last_api_call
@@ -96,68 +92,61 @@ class KalshiClient:
 
     # ------------------------------------------------------------------ markets
 
-    def get_markets(self, series_ticker: str = None, status: str = "open") -> list[dict]:
-        """Fetch active markets, optionally filtered by series ticker."""
+    def get_markets(self, series_ticker: str = None, status: str = "open") -> list:
         params = f"?status={status}"
         if series_ticker:
             params += f"&series_ticker={series_ticker}"
-        response = self._request("GET", f"/markets{params}")
-        return response.get("markets", [])
+        return self._request("GET", f"/markets{params}").get("markets", [])
 
     def get_market(self, ticker: str) -> dict:
-        """Fetch a single market by ticker."""
         return self._request("GET", f"/markets/{ticker}")
 
     def get_orderbook(self, ticker: str, depth: int = 5) -> dict:
-        """Fetch orderbook for a market."""
         return self._request("GET", f"/markets/{ticker}/orderbook?depth={depth}")
 
     # ------------------------------------------------------------------ orders
 
-    def place_order(self, ticker: str, side: str, max_cost_dollars: float) -> dict:
+    def place_order(self, ticker: str, side: str, price_cents: int, max_cost_dollars: float) -> dict:
         """
-        Place a fill-or-kill market order using buy_max_cost.
+        Place a fill-or-kill order using buy_max_cost.
 
-        Spends up to max_cost_dollars at the current best available price.
-        No limit price, no resting order on the book — fills immediately or
-        cancels entirely. This eliminates the duplicate order problem where
-        resting limit orders accumulate and all fill when price hits the limit.
+        Kalshi requires price + count + buy_max_cost for FoK behavior.
+        - price_cents: ceiling price we're willing to pay (current ask + 1-2c)
+        - count: calculated from budget / price
+        - buy_max_cost: hard dollar cap — triggers FoK, fills immediately or cancels
 
-        side: 'yes' or 'no'
-        max_cost_dollars: maximum dollars to spend (e.g. 3.00)
+        No resting orders are ever left on the book.
         """
         max_cost_cents = int(max_cost_dollars * 100)
+        count = max(1, max_cost_cents // max(1, price_cents))
 
         if self.config.dry_run:
-            logger.info(f"[DRY RUN] Would place {side.upper()} FoK order: "
-                        f"up to ${max_cost_dollars:.2f} on {ticker}")
-            return {"order": {"order_id": "dry_run"}, "status": "simulated"}
+            logger.info(f"[DRY RUN] FoK {side.upper()} {count}x@{price_cents}c "
+                        f"max=${max_cost_dollars:.2f} on {ticker}")
+            return {"order": {"order_id": "dry_run", "status": "filled"}}
 
-        # buy_max_cost automatically triggers Fill-or-Kill per Kalshi docs.
-        # No price field or count needed — Kalshi fills at best available ask.
+        price_field = "yes_price" if side == "yes" else "no_price"
         body = {
             "ticker": ticker,
             "action": "buy",
             "side": side,
+            price_field: price_cents,
+            "count": count,
             "buy_max_cost": max_cost_cents,
         }
         return self._request("POST", "/portfolio/orders", body)
 
     def cancel_order(self, order_id: str) -> dict:
-        """Cancel an open order."""
         if self.config.dry_run:
-            logger.info(f"[DRY RUN] Would cancel order {order_id}")
             return {"status": "simulated"}
         return self._request("DELETE", f"/portfolio/orders/{order_id}")
 
     # ------------------------------------------------------------------ portfolio
 
     def get_balance(self) -> float:
-        """Return current balance in dollars."""
         resp = self._request("GET", "/portfolio/balance")
-        return resp.get("balance", 0) / 100  # Kalshi returns cents
+        return resp.get("balance", 0) / 100
 
-    def get_positions(self) -> list[dict]:
-        """Return all open positions."""
+    def get_positions(self) -> list:
         resp = self._request("GET", "/portfolio/positions")
         return resp.get("market_positions", [])
