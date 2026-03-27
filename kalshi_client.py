@@ -6,7 +6,6 @@ RSA-PSS authentication, rate limiting, retries, and typed responses.
 
 import time
 import base64
-import hashlib
 import json
 import logging
 from pathlib import Path
@@ -41,10 +40,8 @@ class KalshiClient:
                 f.read(), password=None, backend=default_backend()
             )
 
-    def _sign_request(self, method: str, path: str, body: str = "") -> dict:
+    def _sign_request(self, method: str, path: str) -> dict:
         ts = str(int(time.time() * 1000))
-        # Kalshi signing: timestamp + METHOD + path (no body, no query params)
-        # See: docs.kalshi.com/getting_started/quick_start_authenticated_requests
         path_without_query = path.split("?")[0]
         msg = ts + method.upper() + path_without_query
         signature = self._private_key.sign(
@@ -74,7 +71,7 @@ class KalshiClient:
         self._rate_limit()
         path = f"/trade-api/v2{endpoint}"
         body_str = json.dumps(body) if body else ""
-        headers = self._sign_request(method, path, body_str)
+        headers = self._sign_request(method, path)
         url = self.base_url + endpoint
 
         for attempt in range(retries):
@@ -117,28 +114,32 @@ class KalshiClient:
 
     # ------------------------------------------------------------------ orders
 
-    def place_order(self, ticker: str, side: str, count: int, price_cents: int) -> dict:
+    def place_order(self, ticker: str, side: str, max_cost_dollars: float) -> dict:
         """
-        Place a limit order.
-        side: 'yes' or 'no'
-        price_cents: integer 1-99 (cents)
-        count: number of contracts
-        """
-        if self.config.dry_run:
-            logger.info(f"[DRY RUN] Would place {side.upper()} order: "
-                        f"{count} contracts @ {price_cents}¢ on {ticker}")
-            return {"order_id": "dry_run", "status": "simulated"}
+        Place a fill-or-kill market order using buy_max_cost.
 
-        # Kalshi requires yes_price or no_price (integer cents 1-99)
-        # NOT limit_price — that field does not exist in their API
-        price_field = "yes_price" if side == "yes" else "no_price"
+        Spends up to max_cost_dollars at the current best available price.
+        No limit price, no resting order on the book — fills immediately or
+        cancels entirely. This eliminates the duplicate order problem where
+        resting limit orders accumulate and all fill when price hits the limit.
+
+        side: 'yes' or 'no'
+        max_cost_dollars: maximum dollars to spend (e.g. 3.00)
+        """
+        max_cost_cents = int(max_cost_dollars * 100)
+
+        if self.config.dry_run:
+            logger.info(f"[DRY RUN] Would place {side.upper()} FoK order: "
+                        f"up to ${max_cost_dollars:.2f} on {ticker}")
+            return {"order": {"order_id": "dry_run"}, "status": "simulated"}
+
+        # buy_max_cost automatically triggers Fill-or-Kill per Kalshi docs.
+        # No price field or count needed — Kalshi fills at best available ask.
         body = {
             "ticker": ticker,
             "action": "buy",
-            "type": "limit",
             "side": side,
-            "count": count,
-            price_field: price_cents,
+            "buy_max_cost": max_cost_cents,
         }
         return self._request("POST", "/portfolio/orders", body)
 

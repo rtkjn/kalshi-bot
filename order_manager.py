@@ -1,12 +1,11 @@
 """
 order_manager.py
-Handles the full lifecycle of orders:
-place → track → confirm fill → close.
+Handles the full lifecycle of orders using fill-or-kill market orders.
 
-Bug fixes:
-- sync_live_position: syncs Kalshi API positions into memory (Bug 1)
-  with recently_closed guard to prevent re-adding just-exited positions
-- execute_exit: only removes position from memory if order succeeds (Bug 3)
+Key change from v1.x: switched from limit orders to buy_max_cost FoK orders.
+- No resting orders on the book
+- Fills immediately at current market price or cancels entirely
+- Eliminates the duplicate order accumulation bug
 """
 
 import logging
@@ -22,7 +21,7 @@ from logger import TradeLogger
 
 logger = logging.getLogger(__name__)
 
-RECENTLY_CLOSED_TTL = 60  # seconds to block re-sync after an exit
+RECENTLY_CLOSED_TTL = 120  # seconds — covers Kalshi's settlement lag
 
 
 @dataclass
@@ -30,9 +29,8 @@ class OpenPosition:
     ticker: str
     side: str
     contracts: int
-    entry_price_cents: int
-    order_id: str
     entry_cost_dollars: float
+    order_id: str
 
 
 class OrderManager:
@@ -43,56 +41,37 @@ class OrderManager:
         self.risk_manager  = risk_manager
         self.trade_logger  = trade_logger
         self.positions: Dict[str, OpenPosition] = {}
-        # Tickers we recently exited — block sync from re-adding for TTL seconds
-        self._recently_closed: Dict[str, float] = {}  # ticker → exit timestamp
+        self._recently_closed: Dict[str, float] = {}
 
-    # ---------------------------------------------------------------- Bug 1 fix
+    # ---------------------------------------------------------------- sync
 
     def sync_live_position(self, ticker: str, position_fp: float):
-        """
-        Called every cycle with live data from Kalshi API.
-        Adds positions that exist on Kalshi but not in memory.
-        Removes positions that have been closed on Kalshi.
+        """Sync live Kalshi positions into memory. Never re-adds recently closed tickers."""
+        contracts = abs(int(float(position_fp)))
 
-        IMPORTANT: Never re-adds a ticker we recently exited — this prevents
-        the loop where a just-sold position is still visible in the API for
-        a few seconds and gets re-added as a new position.
-        """
-        contracts = abs(int(position_fp))
-
-        if position_fp == 0:
-            # Position gone on Kalshi — clean up memory if needed
+        if float(position_fp) == 0 or contracts == 0:
             if ticker in self.positions:
                 logger.info(f"Sync: removing closed position {ticker} from memory")
                 del self.positions[ticker]
             return
 
-        # Check recently-closed guard
         closed_at = self._recently_closed.get(ticker)
         if closed_at and time.time() - closed_at < RECENTLY_CLOSED_TTL:
             remaining = RECENTLY_CLOSED_TTL - (time.time() - closed_at)
-            logger.debug(f"Sync: skipping {ticker} — recently closed, {remaining:.0f}s remaining in guard")
+            logger.debug(f"Sync: skipping {ticker} — recently closed ({remaining:.0f}s left)")
             return
 
-        # Only add if not already in memory
-        if ticker not in self.positions and contracts > 0:
-            side = "no" if position_fp < 0 else "yes"
+        if ticker not in self.positions:
+            side = "no" if float(position_fp) < 0 else "yes"
             self.positions[ticker] = OpenPosition(
-                ticker=ticker,
-                side=side,
-                contracts=contracts,
-                entry_price_cents=0,
-                order_id="synced",
-                entry_cost_dollars=0,
+                ticker=ticker, side=side, contracts=contracts,
+                entry_cost_dollars=0, order_id="synced",
             )
             self.risk_manager.on_position_opened(ticker)
-            logger.info(f"Sync: added live position {ticker} "
-                        f"({side} {contracts}x) from Kalshi API")
+            logger.info(f"Sync: added live position {ticker} ({side} {contracts}x)")
 
     def _mark_recently_closed(self, ticker: str):
-        """Record that we just exited this ticker — blocks sync re-add for TTL."""
         self._recently_closed[ticker] = time.time()
-        # Clean up old entries while we're here
         now = time.time()
         self._recently_closed = {
             t: ts for t, ts in self._recently_closed.items()
@@ -102,48 +81,58 @@ class OrderManager:
     # ---------------------------------------------------------------- entries
 
     def execute_entry(self, decision: TradeDecision) -> bool:
-        """Place an entry order. Returns True if order was accepted."""
+        """Place a FoK entry. Spends up to trade_size_dollars at current market price."""
         if decision.action != "buy":
             return False
 
         ticker = decision.ticker
 
-        # Hard guard — never enter a ticker already in memory
         if ticker in self.positions:
             logger.warning(f"Duplicate entry blocked: {ticker} already in positions")
             return False
 
-        contracts = max(1, int(
-            decision.size_dollars / (decision.price_cents / 100)
-        ))
+        closed_at = self._recently_closed.get(ticker)
+        if closed_at and time.time() - closed_at < RECENTLY_CLOSED_TTL:
+            logger.warning(f"Entry blocked: {ticker} in recently_closed guard")
+            return False
+
+        # Enforce position limit before placing any order
+        allowed, reason = self.risk_manager.can_open_position(ticker)
+        if not allowed:
+            logger.info(f"Entry blocked by risk manager: {reason}")
+            return False
+
+        max_cost = self.config.trade_size_dollars
 
         try:
             result = self.client.place_order(
                 ticker=ticker,
                 side=decision.side,
-                count=contracts,
-                price_cents=decision.price_cents,
+                max_cost_dollars=max_cost,
             )
 
-            order_id = result.get("order", {}).get("order_id") or result.get("order_id", "unknown")
-            cost     = contracts * decision.price_cents / 100
+            order = result.get("order", {})
+            order_id = order.get("order_id", "unknown")
+            status = order.get("status", "")
+
+            if status == "canceled":
+                logger.warning(f"Entry FoK canceled (no liquidity): {ticker}")
+                return False
+
+            fill_cost = float(order.get("taker_fill_cost_dollars") or max_cost)
+            est_contracts = max(1, int(fill_cost / (decision.price_cents / 100))) if decision.price_cents else 1
 
             self.positions[ticker] = OpenPosition(
-                ticker=ticker,
-                side=decision.side,
-                contracts=contracts,
-                entry_price_cents=decision.price_cents,
-                order_id=order_id,
-                entry_cost_dollars=cost,
+                ticker=ticker, side=decision.side, contracts=est_contracts,
+                entry_cost_dollars=fill_cost, order_id=order_id,
             )
             self.risk_manager.on_position_opened(ticker)
             self.trade_logger.log_entry(
-                ticker=ticker, side=decision.side, contracts=contracts,
-                price_cents=decision.price_cents, cost_dollars=cost,
+                ticker=ticker, side=decision.side, contracts=est_contracts,
+                price_cents=decision.price_cents, cost_dollars=fill_cost,
                 order_id=order_id, reason=decision.reason,
             )
-            logger.info(f"ENTRY PLACED: {ticker} | {decision.side} | "
-                        f"{contracts}x @ {decision.price_cents}¢ | cost=${cost:.2f}")
+            logger.info(f"ENTRY PLACED: {ticker} | {decision.side} | FoK ~${fill_cost:.2f}")
             return True
 
         except Exception as e:
@@ -153,11 +142,7 @@ class OrderManager:
     # ---------------------------------------------------------------- exits
 
     def execute_exit(self, decision: TradeDecision) -> bool:
-        """
-        Place an exit order.
-        Only removes position from memory if order succeeds.
-        Marks ticker as recently closed to block sync re-add.
-        """
+        """Sell position using FoK sell with reduce_only. Keeps position open on failure."""
         if decision.action != "sell":
             return False
 
@@ -168,32 +153,38 @@ class OrderManager:
             return False
 
         try:
-            result = self.client.place_order(
-                ticker=ticker,
-                side=position.side,
-                count=position.contracts,
-                price_cents=decision.price_cents,
-            )
+            price_field = "yes_price" if position.side == "yes" else "no_price"
+            body = {
+                "ticker": ticker,
+                "action": "sell",
+                "side": position.side,
+                "count": position.contracts,
+                "reduce_only": True,
+                "time_in_force": "fill_or_kill",
+                price_field: max(1, (decision.price_cents or 50) - 2),
+            }
+            result = self.client._request("POST", "/portfolio/orders", body)
+            order  = result.get("order", {})
+            status = order.get("status", "")
 
-            proceeds = position.contracts * decision.price_cents / 100
+            if status == "canceled":
+                logger.warning(f"Exit FoK canceled for {ticker} — will retry next cycle")
+                return False
+
+            proceeds = position.contracts * (decision.price_cents or 50) / 100
             pnl      = proceeds - position.entry_cost_dollars
 
             self.risk_manager.on_position_closed(ticker, pnl)
             self.trade_logger.log_exit(
-                ticker=ticker, side=position.side,
-                contracts=position.contracts,
-                exit_price_cents=decision.price_cents,
-                proceeds_dollars=proceeds, pnl_dollars=pnl,
-                reason=decision.reason,
+                ticker=ticker, side=position.side, contracts=position.contracts,
+                exit_price_cents=decision.price_cents or 50,
+                proceeds_dollars=proceeds, pnl_dollars=pnl, reason=decision.reason,
             )
             del self.positions[ticker]
-
-            # Mark as recently closed — prevents sync from re-adding it
             self._mark_recently_closed(ticker)
 
             logger.info(f"EXIT PLACED: {ticker} | {position.side} | "
-                        f"{position.contracts}x @ {decision.price_cents}¢ | "
-                        f"pnl=${pnl:+.2f}")
+                        f"{position.contracts}x | pnl=~${pnl:+.2f}")
             return True
 
         except Exception as e:
