@@ -22,11 +22,12 @@ class Config:
     dry_run: bool
 
     # --- Strategy ---
-    entry_odds_threshold: float   # buy when YES or NO odds drop below this (e.g. 0.40)
+    entry_odds_threshold: float   # buy when YES or NO odds drop BELOW this (e.g. 0.40)
+    entry_odds_floor: float       # but only if odds are ABOVE this floor (e.g. 0.35)
     exit_odds_low: float          # sell when odds recover to this (e.g. 0.48)
-    exit_odds_high: float         # or this (e.g. 0.50)
+    exit_odds_high: float         # unused but kept for config compat
     entry_window_pct: float       # only enter in first X% of market lifetime (e.g. 0.40)
-    trade_size_dollars: float     # fixed dollar amount per trade (e.g. 5.00)
+    trade_size_dollars: float     # fixed dollar amount per trade (e.g. 3.00)
 
     # --- Risk ---
     max_concurrent_positions: int
@@ -47,13 +48,14 @@ def load_config() -> Config:
         dry_run=os.getenv("DRY_RUN", "true").lower() == "true",
 
         entry_odds_threshold=float(os.getenv("ENTRY_ODDS_THRESHOLD", "40")) / 100,
+        entry_odds_floor=float(os.getenv("ENTRY_ODDS_FLOOR", "35")) / 100,
         exit_odds_low=float(os.getenv("EXIT_ODDS_LOW", "48")) / 100,
         exit_odds_high=float(os.getenv("EXIT_ODDS_HIGH", "50")) / 100,
         entry_window_pct=float(os.getenv("ENTRY_WINDOW_PCT", "0.40")),
-        trade_size_dollars=float(os.getenv("TRADE_SIZE_DOLLARS", "5.00")),
+        trade_size_dollars=float(os.getenv("TRADE_SIZE_DOLLARS", "3.00")),
 
-        max_concurrent_positions=int(os.getenv("MAX_CONCURRENT_POSITIONS", "3")),
-        daily_loss_limit_dollars=float(os.getenv("DAILY_LOSS_LIMIT_DOLLARS", "50.0")),
+        max_concurrent_positions=int(os.getenv("MAX_CONCURRENT_POSITIONS", "2")),
+        daily_loss_limit_dollars=float(os.getenv("DAILY_LOSS_LIMIT_DOLLARS", "10.0")),
         momentum_filter_pct=float(os.getenv("MOMENTUM_FILTER_PCT", "0.5")) / 100,
         cooldown_after_loss_seconds=int(os.getenv("COOLDOWN_AFTER_LOSS_SECONDS", "300")),
 
