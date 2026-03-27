@@ -5,12 +5,14 @@ place → track → confirm fill → close.
 
 Bug fixes:
 - sync_live_position: syncs Kalshi API positions into memory (Bug 1)
+  with recently_closed guard to prevent re-adding just-exited positions
 - execute_exit: only removes position from memory if order succeeds (Bug 3)
 """
 
 import logging
+import time
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, Dict
 
 from config import Config
 from kalshi_client import KalshiClient
@@ -19,6 +21,8 @@ from risk_manager import RiskManager
 from logger import TradeLogger
 
 logger = logging.getLogger(__name__)
+
+RECENTLY_CLOSED_TTL = 60  # seconds to block re-sync after an exit
 
 
 @dataclass
@@ -34,44 +38,66 @@ class OpenPosition:
 class OrderManager:
     def __init__(self, config: Config, client: KalshiClient,
                  risk_manager: RiskManager, trade_logger: TradeLogger):
-        self.config       = config
-        self.client       = client
-        self.risk_manager = risk_manager
-        self.trade_logger = trade_logger
-        self.positions: dict[str, OpenPosition] = {}
+        self.config        = config
+        self.client        = client
+        self.risk_manager  = risk_manager
+        self.trade_logger  = trade_logger
+        self.positions: Dict[str, OpenPosition] = {}
+        # Tickers we recently exited — block sync from re-adding for TTL seconds
+        self._recently_closed: Dict[str, float] = {}  # ticker → exit timestamp
 
     # ---------------------------------------------------------------- Bug 1 fix
 
     def sync_live_position(self, ticker: str, position_fp: float):
         """
         Called every cycle with live data from Kalshi API.
-        If Kalshi shows a position we don't have in memory, add it.
-        If Kalshi shows zero position, remove it from memory.
-        This prevents the in-memory state from drifting from reality.
+        Adds positions that exist on Kalshi but not in memory.
+        Removes positions that have been closed on Kalshi.
+
+        IMPORTANT: Never re-adds a ticker we recently exited — this prevents
+        the loop where a just-sold position is still visible in the API for
+        a few seconds and gets re-added as a new position.
         """
         contracts = abs(int(position_fp))
+
         if position_fp == 0:
+            # Position gone on Kalshi — clean up memory if needed
             if ticker in self.positions:
                 logger.info(f"Sync: removing closed position {ticker} from memory")
                 del self.positions[ticker]
             return
 
+        # Check recently-closed guard
+        closed_at = self._recently_closed.get(ticker)
+        if closed_at and time.time() - closed_at < RECENTLY_CLOSED_TTL:
+            remaining = RECENTLY_CLOSED_TTL - (time.time() - closed_at)
+            logger.debug(f"Sync: skipping {ticker} — recently closed, {remaining:.0f}s remaining in guard")
+            return
+
+        # Only add if not already in memory
         if ticker not in self.positions and contracts > 0:
-            # Position exists on Kalshi but not in memory — likely from a previous
-            # bot session or a partially-confirmed order. Add it.
             side = "no" if position_fp < 0 else "yes"
             self.positions[ticker] = OpenPosition(
                 ticker=ticker,
                 side=side,
                 contracts=contracts,
-                entry_price_cents=0,   # unknown — synced from live
+                entry_price_cents=0,
                 order_id="synced",
-                entry_cost_dollars=0,  # unknown
+                entry_cost_dollars=0,
             )
             self.risk_manager.on_position_opened(ticker)
             logger.info(f"Sync: added live position {ticker} "
                         f"({side} {contracts}x) from Kalshi API")
 
+    def _mark_recently_closed(self, ticker: str):
+        """Record that we just exited this ticker — blocks sync re-add for TTL."""
+        self._recently_closed[ticker] = time.time()
+        # Clean up old entries while we're here
+        now = time.time()
+        self._recently_closed = {
+            t: ts for t, ts in self._recently_closed.items()
+            if now - ts < RECENTLY_CLOSED_TTL
+        }
 
     # ---------------------------------------------------------------- entries
 
@@ -129,9 +155,8 @@ class OrderManager:
     def execute_exit(self, decision: TradeDecision) -> bool:
         """
         Place an exit order.
-        Bug 3 fix: only removes position from memory if the order succeeds.
-        If the order fails, the position stays open and will be re-evaluated
-        on the next cycle.
+        Only removes position from memory if order succeeds.
+        Marks ticker as recently closed to block sync re-add.
         """
         if decision.action != "sell":
             return False
@@ -150,8 +175,6 @@ class OrderManager:
                 price_cents=decision.price_cents,
             )
 
-            # Only mark closed if the order was accepted
-            order_id = result.get("order", {}).get("order_id") or result.get("order_id", "")
             proceeds = position.contracts * decision.price_cents / 100
             pnl      = proceeds - position.entry_cost_dollars
 
@@ -165,14 +188,15 @@ class OrderManager:
             )
             del self.positions[ticker]
 
+            # Mark as recently closed — prevents sync from re-adding it
+            self._mark_recently_closed(ticker)
+
             logger.info(f"EXIT PLACED: {ticker} | {position.side} | "
                         f"{position.contracts}x @ {decision.price_cents}¢ | "
                         f"pnl=${pnl:+.2f}")
             return True
 
         except Exception as e:
-            # Bug 3: DO NOT remove position from memory on failure
-            # It stays open and the next cycle will try again
             logger.error(f"Exit order failed for {ticker}: {e} — position kept open")
             return False
 
