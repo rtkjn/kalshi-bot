@@ -1,7 +1,7 @@
 """
 config.py
 Loads all settings from .env into a typed Config object.
-Every other module imports from here — never reads .env directly.
+Supports MODE=demo and MODE=live — switches all credentials automatically.
 """
 
 import os
@@ -20,31 +20,36 @@ class Config:
     base_url: str
     ws_url: str
     dry_run: bool
+    mode: str             # 'demo' or 'live'
 
     # --- Strategy ---
-    entry_odds_threshold: float   # buy when YES or NO odds drop BELOW this (e.g. 0.40)
-    entry_odds_floor: float       # but only if odds are ABOVE this floor (e.g. 0.35)
-    exit_odds_low: float          # sell when odds recover to this (e.g. 0.48)
-    exit_odds_high: float         # unused but kept for config compat
-    entry_window_pct: float       # only enter in first X% of market lifetime (e.g. 0.40)
-    trade_size_dollars: float     # fixed dollar amount per trade (e.g. 3.00)
+    entry_odds_threshold: float
+    entry_odds_floor: float
+    exit_odds_low: float
+    exit_odds_high: float
+    entry_window_pct: float
+    trade_size_dollars: float
 
     # --- Risk ---
     max_concurrent_positions: int
     daily_loss_limit_dollars: float
-    momentum_filter_pct: float    # skip entry if price moved more than X% recently
+    momentum_filter_pct: float
     cooldown_after_loss_seconds: int
 
     # --- Assets ---
-    assets: List[str]             # e.g. ["BTC", "ETH"]
+    assets: List[str]
 
 
 def load_config() -> Config:
+    mode = os.getenv("MODE", "live").lower()
+    prefix = "DEMO" if mode == "demo" else "LIVE"
+
     return Config(
-        api_key_id=os.getenv("KALSHI_API_KEY_ID", ""),
-        private_key_path=os.getenv("KALSHI_PRIVATE_KEY_PATH", "./kalshi_private_key.pem"),
-        base_url=os.getenv("KALSHI_BASE_URL", "https://trading-api.kalshi.com/trade-api/v2"),
-        ws_url=os.getenv("KALSHI_WS_URL", "wss://trading-api.kalshi.com/trade-api/ws/v2"),
+        mode=mode,
+        api_key_id=os.getenv(f"{prefix}_API_KEY_ID", ""),
+        private_key_path=os.getenv(f"{prefix}_PRIVATE_KEY_PATH", "./kalshi_private_key.pem"),
+        base_url=os.getenv(f"{prefix}_BASE_URL", "https://api.elections.kalshi.com/trade-api/v2"),
+        ws_url=os.getenv(f"{prefix}_WS_URL", "wss://api.elections.kalshi.com/trade-api/ws/v2"),
         dry_run=os.getenv("DRY_RUN", "true").lower() == "true",
 
         entry_odds_threshold=float(os.getenv("ENTRY_ODDS_THRESHOLD", "40")) / 100,

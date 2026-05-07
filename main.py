@@ -80,10 +80,10 @@ async def run_bot():
     config = load_config()
 
     logger.info("=" * 60)
-    logger.info("Kalshi Mean-Reversion Bot starting up")
+    logger.info(f"Kalshi Mean-Reversion Bot starting up [{config.mode.upper()} MODE]")
     logger.info(f"DRY RUN:   {config.dry_run}")
     logger.info(f"Assets:    {config.assets}")
-    logger.info(f"Entry:     < {config.entry_odds_threshold:.0%}")
+    logger.info(f"Entry band: {config.entry_odds_floor:.0%} - {config.entry_odds_threshold:.0%}")
     logger.info(f"Exit:      >= {config.exit_odds_low:.0%}")
     logger.info(f"Trade size: ${config.trade_size_dollars}")
     logger.info(f"Max positions: {config.max_concurrent_positions}")
